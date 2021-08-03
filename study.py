@@ -3,21 +3,12 @@ import sys
 
 from uiautomator import device as driver
 import qrcode
-import numpy as np
-import time
 import os
 
 Height = 1280
 Width = 720
 EXE = 'D:\\XuexiXuexi-master\\xxqg\\study.exe'
 TOKEN='D:\\XuexiXuexi-master\\xxqg\\token.txt'
-all_of_list = []
-if os.path.isfile("db.npy"):
-    all_of_list = np.load("db.npy").tolist()
-
-all_of_list2 = []
-if os.path.isfile("db2.npy"):
-    all_of_list2 = np.load("db2.npy").tolist()
 
 
 def login(pwd):
@@ -54,7 +45,7 @@ def send_email():
     user = '249113537@163.com'
     password = 'TIXWHDJRIYGEBLXY'
     smtp_server = 'smtp.163.com'
-    to_addr = '303734023@qq.com'
+    to_addr = 'jinrongfrandy@qq.com'
     import smtplib
     server = smtplib.SMTP(smtp_server, 25)  # Smtp协议默认窗口是25
     server.login(user, password)
@@ -72,7 +63,7 @@ def autoJob(tv, sleep_time, sum=6, click=True):
         try:
             for i in range(len(text_lists)):
                 txt = text_lists[i].text
-                if len(txt) > 11 and txt not in all_of_list and count < sum:
+                if len(txt) > 11  and count < sum:
                     driver(text=txt, className='android.widget.TextView').click()
                     # 分享，收藏，评论
                     if click and count_click < 2:
@@ -83,8 +74,6 @@ def autoJob(tv, sleep_time, sum=6, click=True):
                         driver(text="分享到学习强国").click()
                         time.sleep(2)
                         driver.press.back()
-                        # 收藏
-                        driver.click(0.84 * Width, 0.975 * Height)
                         # 评论
                         time.sleep(1)
                         driver(text="欢迎发表你的观点").click()
@@ -96,12 +85,6 @@ def autoJob(tv, sleep_time, sum=6, click=True):
                         time.sleep(1)
                         driver.click(0.94 * Width, 0.864 * Height)
                         count_click = count_click + 1
-
-                        # 取消收藏
-                        time.sleep(3)
-                        driver.click(0.84 * Width, 0.975 * Height)
-                        time.sleep(1)
-                        driver.click(0.84 * Width, 0.975 * Height)
                         # 删除发布的评论
                         time.sleep(2)
                         driver(text="删除").click()
@@ -109,7 +92,6 @@ def autoJob(tv, sleep_time, sum=6, click=True):
                         driver(text="确认").click()
 
                     count = count + 1
-                    all_of_list.append(txt)
                     print("正在" + tv + "...", txt)
                     time.sleep(sleep_time)
                     driver.press.back()
@@ -135,37 +117,9 @@ def read_articles():
     time.sleep(2)
     # 切换到要闻界面
     driver(text='新思想').click()
-    autoJob(tv="阅读文章",sum=1, sleep_time=130)
+    autoJob(tv="阅读文章",sum=2, sleep_time=30)
 
 
-# 观看视频,每个视频观看20秒，以及17分钟新闻联盟
-def watch_video():
-    time.sleep(2)
-    # 切换到电视台页面
-    driver(resourceId="cn.xuexi.android:id/home_bottom_tab_button_contact").click()
-    driver(text="联播频道").click()
-    autoJob(tv="观看视频", sleep_time=25, click=False)
-    driver(text="联播频道").click()
-
-    news = None
-    for v in driver(className='android.widget.TextView'):
-        if "《新闻联播》" in v.text:
-            news = v.text
-            break
-    driver(text=news).click()
-
-    # 100天后删除最早一天的记录
-    text_list = np.array(all_of_list)
-
-    if len(text_list) > 2500:
-        text_list = text_list[25:]
-    # 存储已看视频和文章
-    np.save('db.npy', text_list)
-
-    print("正在观看新闻联播...")
-    time.sleep(1050)
-    driver.press.back()
-    print("观看视频结束.")
 
 
 def end_program(pro_name):

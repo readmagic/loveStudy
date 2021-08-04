@@ -68,12 +68,12 @@ def autoJob(tv, sleep_time, sum=6, click=True):
                     # 分享，收藏，评论
                     if click and count_click < 2:
                         # 分享
-                        time.sleep(4)
-                        driver.click(0.94 * Width, 0.975 * Height)
-                        time.sleep(2)
-                        driver(text="分享到学习强国").click()
-                        time.sleep(2)
-                        driver.press.back()
+                        # time.sleep(4)
+                        # driver.click(0.94 * Width, 0.975 * Height)
+                        # time.sleep(2)
+                        # driver(text="分享到学习强国").click()
+                        # time.sleep(2)
+                        # driver.press.back()
                         # 评论
                         time.sleep(1)
                         driver(text="欢迎发表你的观点").click()
@@ -208,8 +208,8 @@ if __name__ == '__main__':
         Width = driver.info['displayWidth']
         # 切换adb输入法
         os.system('adb shell ime set com.android.adbkeyboard/.AdbIME')
-        login(password)
-        watch_local()
+        #login(password)
+        #watch_local()
         read_articles()
         # watch_video()
         # 关闭app

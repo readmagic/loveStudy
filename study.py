@@ -7,8 +7,8 @@ import os
 
 Height = 1280
 Width = 720
-EXE = 'D:\\XuexiXuexi-master\\xxqg\\study.exe'
-TOKEN='D:\\XuexiXuexi-master\\xxqg\\token.txt'
+EXE = 'D:\\xxqg\\study.exe'
+TOKEN='D:\\xxqg\\token.txt'
 
 
 def login(pwd):
@@ -43,7 +43,7 @@ def send_email():
     msg.attach(img)
 
     user = '249113537@163.com'
-    password = 'TIXWHDJRIYGEBLXY'
+    password = 'DSFRXHYIZUWQYODP'
     smtp_server = 'smtp.163.com'
     to_addr = 'jinrongfrandy@qq.com'
     import smtplib
@@ -68,12 +68,12 @@ def autoJob(tv, sleep_time, sum=6, click=True):
                     # 分享，收藏，评论
                     if click and count_click < 2:
                         # 分享
-                        # time.sleep(4)
-                        # driver.click(0.94 * Width, 0.975 * Height)
-                        # time.sleep(2)
-                        # driver(text="分享到学习强国").click()
-                        # time.sleep(2)
-                        # driver.press.back()
+                        time.sleep(4)
+                        driver.click(0.94 * Width, 0.975 * Height)
+                        time.sleep(2)
+                        driver(text="分享到学习强国").click()
+                        time.sleep(2)
+                        driver.press.back()
                         # 评论
                         time.sleep(1)
                         driver(text="欢迎发表你的观点").click()
@@ -81,8 +81,6 @@ def autoJob(tv, sleep_time, sum=6, click=True):
                         os.system("adb shell am broadcast -a ADB_INPUT_TEXT --es msg '中国加油！全力支持'")
                         os.system("adb shell input keyevent 66")  # 不知道为什么输入一个回车，点击发布才有反应
                         time.sleep(2)
-                        driver(text="发布").click()
-                        time.sleep(1)
                         driver.click(0.94 * Width, 0.864 * Height)
                         count_click = count_click + 1
                         # 删除发布的评论
@@ -208,8 +206,8 @@ if __name__ == '__main__':
         Width = driver.info['displayWidth']
         # 切换adb输入法
         os.system('adb shell ime set com.android.adbkeyboard/.AdbIME')
-        #login(password)
-        #watch_local()
+        # login(password)
+        # watch_local()
         read_articles()
         # watch_video()
         # 关闭app
@@ -219,12 +217,13 @@ if __name__ == '__main__':
 
     cookies = web_login()
     for cookie in cookies:
-        if cookie['name']=='token':
+        if cookie['name'] == 'token':
             token = cookie['value']
             fo = open(TOKEN, "w")
-            fo.write("token="+token+"; domain=.xuexi.cn; path=/")
+            fo.write("token=" + token + "; domain=.xuexi.cn; path=/")
             fo.close()
             break
-    os.system('start '+EXE)
+    os.system('start ' + EXE)
     time.sleep(500)
     end_program('study.exe')
+

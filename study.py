@@ -19,17 +19,18 @@ import hashlib
 
 # 从 secrets 模块获取 SystemRandom 实例
 _inst = secrets.SystemRandom()
+#设备的实例号,通过 adb devices获得
 driver = u2.connect("8106493f")
 session = HTMLSession()
 my_conn = sqlite3.connect('records.db')
 my_cursor = my_conn.cursor()
-token = 'da4868c64b794547b5b255d04c3bac76'  # 在pushpush网站中可以找到
+token = 'xxx'  # 在pushpush网站中可以找到
 today = date.today()
 max_try = 2  # 所有任务是否都完成,没有完成尝试的次数
 
 # 百度ocr
-API_KEY = 'o2pSYuGLpIbuOfQsaHMyNRjY'
-SECRET_KEY = 'IRmkGar1uY7M7w1dqhZqFHI5TqEZP0np'
+API_KEY = 'xxx'
+SECRET_KEY = 'xxx'
 OCR_URL = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic"
 TOKEN_URL = 'https://aip.baidubce.com/oauth/2.0/token'
 TWO_FOUR_ANSWER ='https://raw.gh.fakev.cn/Pandaver/XXQG_TiKu_Transform/main/question'
@@ -974,12 +975,9 @@ def answer():
 
 
 def upload(filePath):
-    data = {'smfile': open(filePath, 'rb')}
-    header = {
-        'Authorization': 'uiev2WRnYy5Yc2BYDbhSLAdzrQ7DOT3n'
-    }
-    r = requests.post('https://sm.ms/api/v2/upload', headers=header, files=data)
-    return r.json()['data']['url']
+    data = {'file': open(filePath, 'rb')}
+    r = requests.post('https://www.imgurl.org/upload/aws_s3',files=data)
+    return r.json()['url']
 
 
 def get_score_and_push_wx():
@@ -1029,8 +1027,7 @@ def has_none_step():
                 "challenge_question",
                 "two_fight_question",
                 "four_fight_question",
-                "weekly_question",
-                "subscribe"
+                "weekly_question"
                 ]
     str = "SELECT id FROM records WHERE date='%s'" % (today)
     i = 0

@@ -1103,17 +1103,6 @@ def capture():
     driver.app_stop("cn.xuexi.android")
 
 
-def test():
-    driver.app_stop("cn.xuexi.android")
-    time.sleep(3)
-    driver.app_start('cn.xuexi.android')
-    global Height
-    Height = driver.info['displayHeight']
-    global Width
-    Width = driver.info['displayWidth']
-    goto_score_page()
-    swipe_question()
-    four_fight_question()
 
 if __name__ == '__main__':
     two_four_answer_update()

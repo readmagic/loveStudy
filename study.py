@@ -976,8 +976,8 @@ def answer():
 
 def upload(filePath):
     data = {'file': open(filePath, 'rb')}
-    r = requests.post('https://www.imgurl.org/upload/aws_s3',files=data)
-    return r.json()['url']
+    r = requests.post('https://www.niupic.com/api/upload',files=data)
+    return r.json()['data']
 
 
 def get_score_and_push_wx():

@@ -176,12 +176,12 @@ def ocr(file_path):
                 if words.startswith(str(i)):
                     question = words.replace(str(i) + ".", "")
                     break
-            if words.startswith('A') or \
-                    words.startswith('B') or \
-                    words.startswith('C') or \
-                    words.startswith('D') or \
-                    words.startswith('E') or \
-                    words.startswith('F'):
+            if words.startswith('A.') or \
+                    words.startswith('B.') or \
+                    words.startswith('C.') or \
+                    words.startswith('D.') or \
+                    words.startswith('E.') or \
+                    words.startswith('F.'):
                 options.append(words.split(".")[1])
         return question, options
     except:

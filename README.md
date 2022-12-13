@@ -14,6 +14,9 @@ pip install -r requirements.txt
 
 #### 4.手机需打开usb调试，安装好学习强国apk
 
+#### 5.修改源码Config.py中的相关配置信息
+
+
 #### 实现功能
 可以自动刷满50+的分，包括：
 - 每日登录      √
@@ -29,6 +32,7 @@ pip install -r requirements.txt
 - 自动订阅      ×
 
 #### 真机平台
+- Mi 6 
 - Mi 11 Pro
 ### 技术优势
 - OCR识别图像
@@ -37,4 +41,5 @@ pip install -r requirements.txt
 - 对接微信通知,随时知道刷分情况
 - 真机实操,告别封号
 - 海量题库,自动更新
+- 多账户登录
 ## 如果觉得工具不错,请点个星星吧~

@@ -361,7 +361,6 @@ def __two_fight_question__():
 
     x, y = SimulateHelper.getMobileXY("two_fight_question")
     x1, y1 = SimulateHelper.getXY(x, y)
-    SimulateHelper.swipe_down_small()
     Config.DRIVER.click(x1, y1)
     time.sleep(3)
     is_ok = True

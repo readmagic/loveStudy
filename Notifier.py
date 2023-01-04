@@ -19,7 +19,7 @@ def logout():
     time.sleep(2)
     Config.DRIVER.click(0.928, 0.082)
     time.sleep(2)
-    Config.DRIVER.click(0.524, 0.737)
+    Config.DRIVER.click(0.524, 0.837)
     time.sleep(2)
     Config.DRIVER.click(0.761, 0.561)
     time.sleep(2)

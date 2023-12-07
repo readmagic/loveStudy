@@ -49,10 +49,10 @@ def task(mobile, password):
         time.sleep(3)
 
     # 看上海本地视频,看10个视频,12篇文章
+    Config.DRIVER(text="主题教育").click()
+    Config.DRIVER(text="亮点").click()
     TimerTask.watch_and_read(mobile, '上海', '东方卫视', 10, 12)
-    AnswerTask.answer(mobile)
-    # todo 每周答题
-    # weekly_wapper()
+    # AnswerTask.answer(mobile)
 
 
 def one_account(mobile, password):
@@ -60,11 +60,7 @@ def one_account(mobile, password):
                 "watch_video",
                 "read_articles",
                 "daily_question",
-                "special_question",
-                "challenge_question",
-                "two_fight_question",
-                "four_fight_question",
-                # "weekly_question"
+                "interest_question",
                 ]
     for i in range(Config.MAX_TRY):
         if DBHelper.has_none_step(all_step, mobile) is False:

@@ -65,8 +65,8 @@ def getMobileXY(key):
         "weekly_question": (2.02, -0.43),
     }
     MI_6_XY = {
-        # 0.9, 0.514
-        "daily_question": (1.05, -0.428),
+        # 0.88, 0.323
+        "daily_question": (1.05, -0.26),
         # 0.897, 0.696
         "special_question": (1.02, -0.6),
         # 0.894, 0.934

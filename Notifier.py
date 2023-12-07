@@ -10,20 +10,7 @@ def notify(mobile):
     Config.DRIVER.app_start('cn.xuexi.android')
     time.sleep(5)
     __get_score_and_push_wx__(mobile)
-    logout()
     Config.DRIVER.app_stop("cn.xuexi.android")
-def logout():
-    Config.DRIVER.press("back")
-    time.sleep(2)
-    Config.DRIVER.click(0.928, 0.082)
-    time.sleep(2)
-    Config.DRIVER.click(0.928, 0.082)
-    time.sleep(2)
-    Config.DRIVER.click(0.524, 0.837)
-    time.sleep(2)
-    Config.DRIVER.click(0.761, 0.561)
-    time.sleep(2)
-
 
 def __get_score_and_push_wx__(mobile):
     import json
@@ -34,7 +21,7 @@ def __get_score_and_push_wx__(mobile):
     content = '<img src="' + url + '"/>'  # 改成你要的正文内容
     url = 'http://www.pushplus.plus/send'
     data = {
-        "token": Config.PUSHPUSH_TOKEN,
+        "token": Config.PUSHPLUS_TOKEN,
         "title": title,
         "content": content,
         "template": "html"

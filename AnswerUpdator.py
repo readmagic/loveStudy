@@ -134,6 +134,6 @@ def __challenge_answer_update__():
         DBHelper.insert_version_to_db(md5, "CHALLENGE_ANSWER")
 
 def update():
-    __two_four_answer_update__()
+    # __two_four_answer_update__()
     __challenge_answer_update__()
 

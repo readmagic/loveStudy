@@ -17,6 +17,8 @@ def watch_and_read(mobile, location, tv, video_num, article_num):
         _watch_video_(video_num,mobile)
         DBHelper.insert_record_to_db(mobile, Config.TODAY, "watch_video")
 
+    Config.DRIVER(text="主题教育").click()
+
     has_read_articles = DBHelper.get_record_from_db(mobile, Config.TODAY, "read_articles")
     if has_read_articles is None:
         _read_articles_(article_num,mobile)
@@ -46,7 +48,7 @@ def _watch_video_(num,mobile):
     print("观看视频结束.")
 
 
-def __autoJob__(mobile,tv, sleep_time, sum=6, discuss=True):
+def __autoJob__(mobile,tv, sleep_time, sum=6, discuss=False):
     count_click = 0
     count = 0
     read_articles = DBHelper.find_article_from_db(mobile)

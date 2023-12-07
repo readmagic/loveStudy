@@ -9,44 +9,57 @@ import random
 
 
 def answer(mobile):
+    def get_weekday():
+        weekday = time.strftime("%w")
+        return weekday
+
+    weekday = get_weekday()
+
     # 去积分页面
     SimulateHelper.goto_score_page()
     SimulateHelper.swipe_question()
-    # 每日答题
-    has_daily_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "daily_question")
-    if has_daily_question is None:
-        if __daily_question__():
-            DBHelper.insert_record_to_db(mobile, Config.TODAY, "daily_question")
 
-    time.sleep(8)
-    # 专项答题
-    has_special_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "special_question")
-    if has_special_question is None:
-        if __special_question__():
-            DBHelper.insert_record_to_db(mobile, Config.TODAY, "special_question")
-    # 挑战答题
-    has_challenge_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "challenge_question")
-    if has_challenge_question is None:
-        if __challenge_question__():
-            DBHelper.insert_record_to_db(mobile, Config.TODAY, "challenge_question")
+    Config.DRIVER(text="去看看").click()
+    time.sleep(2)
 
-    if Config.MOBILE_TYPE == "MI6":
-        SimulateHelper.swipe_down_small()
-    # 四人对战
-    has_four_fight_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "four_fight_question")
-    if has_four_fight_question is None:
-        is_ok = True
-        for i in range(2):
-            is_ok = __four_fight_question__()
-        if is_ok:
-            DBHelper.insert_record_to_db(mobile, Config.TODAY, "four_fight_question")
-    if Config.MOBILE_TYPE == "MI6":
-        SimulateHelper.swipe_down_small()
-    # 双人对战
-    has_two_fight_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "two_fight_question")
-    if has_two_fight_question is None:
-        if __two_fight_question__():
-            DBHelper.insert_record_to_db(mobile, Config.TODAY, "two_fight_question")
+    if weekday == '4':
+        # 四人对战
+        has_four_fight_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "interest_question")
+        if has_four_fight_question is None:
+            for i in range(2):
+                is_ok = __four_fight_question__()
+                if is_ok:
+                    DBHelper.insert_record_to_db(mobile, Config.TODAY, "interest_question")
+                    break
+
+    # # 每日答题
+    # has_daily_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "interest_question")
+    # if has_daily_question is None:
+    #     if __daily_question__():
+    #         DBHelper.insert_record_to_db(mobile, Config.TODAY, "interest_question")
+    #
+    # time.sleep(8)
+    # # 专项答题
+    # has_special_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "interest_question")
+    # if has_special_question is None:
+    #     if __special_question__():
+    #         DBHelper.insert_record_to_db(mobile, Config.TODAY, "interest_question")
+    # # 挑战答题
+    # has_challenge_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "interest_question")
+    # if has_challenge_question is None:
+    #     if __challenge_question__():
+    #         DBHelper.insert_record_to_db(mobile, Config.TODAY, "interest_question")
+    #
+    # if Config.MOBILE_TYPE == "MI6":
+    #     SimulateHelper.swipe_down_small()
+    #
+    # if Config.MOBILE_TYPE == "MI6":
+    #     SimulateHelper.swipe_down_small()
+    # # 双人对战
+    # has_two_fight_question = DBHelper.get_record_from_db(mobile, Config.TODAY, "interest_question")
+    # if has_two_fight_question is None:
+    #     if __two_fight_question__():
+    #         DBHelper.insert_record_to_db(mobile, Config.TODAY, "interest_question")
 
 
 def __daily_question__():
@@ -125,7 +138,7 @@ def __daily_question__():
 
     x, y = SimulateHelper.getMobileXY('daily_question')
     x1, y1 = SimulateHelper.getXY(x, y)
-    SimulateHelper.swipe_down_small()
+    # SimulateHelper.swipe_down_small()
     Config.DRIVER.click(x1, y1)
     time.sleep(5)
     is_ok = True
@@ -228,6 +241,7 @@ def __special_question__():
             else:
                 SimulateHelper.swipe_down()
                 search_start_question(i + 1)
+
     search_start_question(0)
     Config.DRIVER.press("back")
     print("专项答题结束.")
